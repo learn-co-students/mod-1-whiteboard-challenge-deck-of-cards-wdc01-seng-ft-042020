@@ -2,31 +2,28 @@ require 'pry'
 class Deck
 
     attr_reader :cards
-    
+
     def initialize
         @cards = []
-
-    end
-
-    def cards=(new_card)
-        @cards << new_card
+        ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"].each do |r|
+            ["Hearts", "Clubs", "Diamonds", "Spades"].each do |s|
+                @cards << Card.new(s, r)
+            end
+        end
     end
 
     def choose_card
-        @cards[rand(0..51)]
+        @cards.delete_at(rand(0..51))
     end
-
-    
 
 end
 
 class Card
 
     @@all = []
-    attr_reader :suit, :rank, :deck
+    attr_reader :suit, :rank
 
-    def initialize(suit, rank, deck)
-        @deck = deck
+    def initialize(suit, rank)
         @suit = suit
         @rank = rank
         @@all << self
@@ -36,8 +33,4 @@ class Card
         @@all
     end
 
-
-
 end
-
-
